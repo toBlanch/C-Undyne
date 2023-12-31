@@ -26,7 +26,7 @@ int shieldG1 = 50;
 int shieldG2 = 70;
 
 bool IfSpear(int colour[3]) {
-    bool isBlack = colour[0] >= black && colour[1] >= black; //If the colour is the background(black). B is not included as sometimes black is(0, 0, 70)
+    bool isBlack = colour[0] <= black && colour[1] <= black; //If the colour is the background(black). B is not included as sometimes black is(0, 0, 70)
     bool isWhite = colour[0] == colour[1] && colour[1] == colour[2]; //All 3 colours being the same is only true for the border of the box and for the characters
     bool isShield = colour[0] >= shieldR1 && colour[0] <= shieldR2 && colour[1] >= shieldG1 && colour[1] <= shieldG2; //If the colour is the blue shield
     return !(isBlack || isWhite || isShield);
