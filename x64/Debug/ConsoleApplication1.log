@@ -1,0 +1,4 @@
+﻿  ConsoleApplication1.cpp
+C:\Users\facts\Documents\GitHub\C-Undyne\ConsoleApplication1.cpp(18): warning C4172: returning address of local variable or temporary: pixelColors
+  LINK : C:\Users\facts\Documents\Visual Studio 2022\Solutions\x64\Debug\ConsoleApplication1.exe not found or not built by the last incremental link; performing full link
+  ConsoleApplication1.vcxproj -> C:\Users\facts\Documents\Visual Studio 2022\Solutions\x64\Debug\ConsoleApplication1.exe

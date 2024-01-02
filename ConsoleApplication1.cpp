@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "ConsoleApplication1.h"
+#include <chrono>
 
 using namespace std;
 
@@ -24,6 +25,7 @@ int shieldR1 = 35;
 int shieldR2 = 65;
 int shieldG1 = 50;
 int shieldG2 = 70;
+typedef std::chrono::high_resolution_clock hiresclock;
 
 bool IfSpear(int colour[3]) {
     bool isBlack = colour[0] <= black && colour[1] <= black; //If the colour is the background(black). B is not included as sometimes black is(0, 0, 70)
@@ -48,23 +50,34 @@ void PressKey(int key) {
 int main()
 {
     while (true) {
-        if (!(GetKeyState('Q') & 0x8000)) {
-            for (int i = 80; i < 121; i += 40) { //80 and 120
-                if (IfSpear(GetPixel(midpointX - i, midpointY))) {
-                    PressKey(0x25);
-                    break;
-                }
-                else if (IfSpear(GetPixel(midpointX + i, midpointY))) {
-                    PressKey(0x27);
-                    break;
-                }
-                else if (IfSpear(GetPixel(midpointX, midpointY - i))) {
-                    PressKey(0x26);
-                    break;
-                }
-                else if (IfSpear(GetPixel(midpointX, midpointY + i))) {
-                    PressKey(0x28);
-                    break;
+        static auto timer = hiresclock::now();
+        auto milisec = (hiresclock::now() - timer).count() / 1000000;			
+        if (milisec > 0.1f * 1000)
+        {
+            //Manages timer
+            timer = hiresclock::now();
+            if (!(GetKeyState('Q') & 0x8000)) {
+                for (int i = 100; i < 141; i += 40) { //100 and 140
+                    if (IfSpear(GetPixel(midpointX - i, midpointY))) {
+                        PressKey(0x25);
+                        //printf("Left");
+                        break;
+                    }
+                    else if (IfSpear(GetPixel(midpointX + i, midpointY))) {
+                        PressKey(0x27);
+                        //printf("Right");
+                        break;
+                    }
+                    else if (IfSpear(GetPixel(midpointX, midpointY - i))) {
+                        PressKey(0x26);
+                        //printf("Up");
+                        break;
+                    }
+                    else if (IfSpear(GetPixel(midpointX, midpointY + i))) {
+                        PressKey(0x28);
+                        //printf("Down");
+                        break;
+                    }
                 }
             }
         }
