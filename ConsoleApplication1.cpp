@@ -50,6 +50,7 @@ void PressKey(int key) {
 
 int main()
 {
+    printf("up");
     while (true) {
         static auto timer = hiresclock::now();
         auto milisec = (hiresclock::now() - timer).count() / 1000000;	
@@ -60,37 +61,37 @@ int main()
             for (int i = 100; i < 141; i += 40) { //100 and 140
                 if (IfSpear(GetPixel(midpointX - i, midpointY))) {
                     if (lastDirection != 1 ) {
-                        //PressKey(0x25);
+                        PressKey(0x25);
                         lastDirection = 1;
                         timer = hiresclock::now();
-                        printf("Left");
+                        //printf("Left");
                     }
                     break;
                 }
                 else if (IfSpear(GetPixel(midpointX + i, midpointY))) {
                     if (lastDirection != 2) {
-                        //PressKey(0x27);
+                        PressKey(0x27);
                         lastDirection = 2;
                         timer = hiresclock::now();
-                        printf("Right");
+                        //printf("Right");
                     }
                     break;
                 }
                 else if (IfSpear(GetPixel(midpointX, midpointY - i))) {
                     if (lastDirection != 3) {
-                        //PressKey(0x26);
+                        PressKey(0x26);
                         lastDirection = 3;
                         timer = hiresclock::now();
-                        printf("Up");
+                        //printf("Up");
                     }
                     break;
                 }
                 else if (IfSpear(GetPixel(midpointX, midpointY + i))) {
                     if (lastDirection != 4) {
-                        //PressKey(0x28);
+                        PressKey(0x28);
                         lastDirection = 4;
                         timer = hiresclock::now();
-                        printf("Down");
+                        //printf("Down");
                     }
                     break;
                 }
