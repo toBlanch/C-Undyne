@@ -26,7 +26,7 @@ int shieldR1 = 35;
 int shieldR2 = 65;
 int shieldG1 = 50;
 int shieldG2 = 70;
-int lastDirection = 0; //1=Left, 2=Right, 3=Down, 4=Up
+int lastDirection = 1; //1=Left, 2=Right, 3=Down, 4=Up
 int innerI = 83;
 
 bool IsSpear(int colour[2]) {
@@ -39,9 +39,7 @@ bool IsSpear(int colour[2]) {
 void PressKey(int key) {
     INPUT ip;
     ip.type = INPUT_KEYBOARD;
-    ip.ki.wScan = 0; // hardware scan code for key
-    ip.ki.time = 0;
-    ip.ki.dwExtraInfo = 0;
+    ip.ki.time = 1;
 
     ip.ki.wVk = key;///key; // 0x41 is the virtual-key code for the "a" key
     ip.ki.dwFlags = 0; // 0 for key press
@@ -52,37 +50,121 @@ void PressKey(int key) {
 int main()
 {
     while (true) {
-        if (lastDirection != 1) {
-            if (IsSpear(GetPixel(midpointX - innerI, midpointY))) {
-                //PressKey(0x25);
-                printf("Left");
-                lastDirection = 1;
-                continue;
-            }
+        if (lastDirection == 1) {
+                if (IsSpear(GetPixel(midpointX + innerI, midpointY))) {
+                    //PressKey(0x27);
+                    printf("Right");
+                    lastDirection = 2;
+                    continue;
+                }
+                if (IsSpear(GetPixel(midpointX, midpointY - innerI))) {
+                    //PressKey(0x26);
+                    printf("Up");
+                    lastDirection = 3;
+                    continue;
+                }
+                if (IsSpear(GetPixel(midpointX, midpointY + innerI))) {
+                    //PressKey(0x28);
+                    printf("Down");
+                    lastDirection = 4;
+                    continue;
+                }
         }
-        if (lastDirection != 2) {
-            if (IsSpear(GetPixel(midpointX + innerI, midpointY))) {
-                //PressKey(0x27);
-                printf("Right");
-                lastDirection = 2;
-                continue;
-            }
+
+        if (lastDirection == 2) {
+                if (IsSpear(GetPixel(midpointX - innerI, midpointY))) {
+                    //PressKey(0x25);
+                    printf("Left");
+                    lastDirection = 1;
+                    continue;
+                }
+                if (IsSpear(GetPixel(midpointX, midpointY - innerI))) {
+                    //PressKey(0x26);
+                    printf("Up");
+                    lastDirection = 3;
+                    continue;
+                }
+                if (IsSpear(GetPixel(midpointX, midpointY + innerI))) {
+                    //PressKey(0x28);
+                    printf("Down");
+                    lastDirection = 4;
+                    continue;
+                }
         }
-        if (lastDirection != 3) {
-            if (IsSpear(GetPixel(midpointX, midpointY - innerI))) {
-                //PressKey(0x26);
-                printf("Up");
-                lastDirection = 3;
-                continue;
-            }
+
+        if (lastDirection == 3) {
+                if (IsSpear(GetPixel(midpointX - innerI, midpointY))) {
+                    //PressKey(0x25);
+                    printf("Left");
+                    lastDirection = 1;
+                    continue;
+                }
+                if (IsSpear(GetPixel(midpointX + innerI, midpointY))) {
+                    //PressKey(0x27);
+                    printf("Right");
+                    lastDirection = 2;
+                    continue;
+                }
+                if (IsSpear(GetPixel(midpointX, midpointY + innerI))) {
+                    //PressKey(0x28);
+                    printf("Down");
+                    lastDirection = 4;
+                    continue;
+                }
+
         }
-        if (lastDirection != 4) {
-            if (IsSpear(GetPixel(midpointX, midpointY + innerI))) {
-                //PressKey(0x28);
-                printf("Down");
-                lastDirection = 4;
-                continue;
-            }
+        if (lastDirection == 4) {
+                if (IsSpear(GetPixel(midpointX - innerI, midpointY))) {
+                    //PressKey(0x25);
+                    printf("Left");
+                    lastDirection = 1;
+                    continue;
+                }
+                if (IsSpear(GetPixel(midpointX + innerI, midpointY))) {
+                    //PressKey(0x27);
+                    printf("Right");
+                    lastDirection = 2;
+                    continue;
+                }
+                if (IsSpear(GetPixel(midpointX, midpointY - innerI))) {
+                    //PressKey(0x26);
+                    printf("Up");
+                    lastDirection = 3;
+                    continue;
+                }
+
         }
+        //if (lastDirection != 1) {
+        //    if (IsSpear(GetPixel(midpointX - innerI, midpointY))) {
+        //        //PressKey(0x25);
+        //        printf("Left");
+        //        lastDirection = 1;
+        //        continue;
+        //    }
+        //}
+        //if (lastDirection != 2) {
+        //    if (IsSpear(GetPixel(midpointX + innerI, midpointY))) {
+        //        //PressKey(0x27);
+        //        printf("Right");
+        //        lastDirection = 2;
+        //        continue;
+        //    }
+        //}
+        //if (lastDirection != 3) {
+        //    if (IsSpear(GetPixel(midpointX, midpointY - innerI))) {
+        //        //PressKey(0x26);
+        //        printf("Up");
+        //        lastDirection = 3;
+        //        continue;
+        //    }
+        //}
+        //if (lastDirection != 4) {
+        //    if (IsSpear(GetPixel(midpointX, midpointY + innerI))) {
+        //        //PressKey(0x28);
+        //        printf("Down");
+        //        lastDirection = 4;
+        //        continue;
+        //    }
+        //}
     }
 }
