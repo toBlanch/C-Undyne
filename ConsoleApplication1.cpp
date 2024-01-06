@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include "ConsoleApplication1.h"
-#include <chrono>
 
 using namespace std;
 
@@ -25,8 +24,8 @@ int shieldR1 = 35;
 int shieldR2 = 65;
 int shieldG1 = 50;
 int shieldG2 = 70;
-typedef std::chrono::high_resolution_clock hiresclock;
 int lastDirection = 0; //1=Left, 2=Right, 3=Down, 4=Up
+int i = 80;
 
 bool IfSpear(int colour[3]) {
     bool isBlack = colour[0] <= black && colour[1] <= black; //If the colour is the background(black). B is not included as sometimes black is(0, 0, 70)
@@ -48,52 +47,40 @@ void PressKey(int key) {
     SendInput(1, &ip, sizeof(INPUT));
 }
 
+
 int main()
 {
     while (true) {
-        static auto timer = hiresclock::now();
-        auto milisec = (hiresclock::now() - timer).count() / 1000000;	
-        if (milisec > 1000) {
-            lastDirection = 0;
+        if (lastDirection != 1) {
+            if (IfSpear(GetPixel(midpointX - i, midpointY))) {
+                PressKey(0x25);
+                lastDirection = 1;
+                continue;
+                //printf("Left");
+            }
         }
-        if (!(GetKeyState('Q') & 0x8000)) {
-            for (int i = 100; i < 141; i += 40) { //100 and 140
-                if (IfSpear(GetPixel(midpointX - i, midpointY))) {
-                    if (lastDirection != 1 ) {
-                        //PressKey(0x25);
-                        lastDirection = 1;
-                        timer = hiresclock::now();
-                        printf("Left");
-                    }
-                    break;
-                }
-                else if (IfSpear(GetPixel(midpointX + i, midpointY))) {
-                    if (lastDirection != 2) {
-                        //PressKey(0x27);
-                        lastDirection = 2;
-                        timer = hiresclock::now();
-                        printf("Right");
-                    }
-                    break;
-                }
-                else if (IfSpear(GetPixel(midpointX, midpointY - i))) {
-                    if (lastDirection != 3) {
-                        //PressKey(0x26);
-                        lastDirection = 3;
-                        timer = hiresclock::now();
-                        printf("Up");
-                    }
-                    break;
-                }
-                else if (IfSpear(GetPixel(midpointX, midpointY + i))) {
-                    if (lastDirection != 4) {
-                        //PressKey(0x28);
-                        lastDirection = 4;
-                        timer = hiresclock::now();
-                        printf("Down");
-                    }
-                    break;
-                }
+        if (lastDirection != 2) {
+            if (IfSpear(GetPixel(midpointX + i, midpointY))) {
+                PressKey(0x27);
+                lastDirection = 2;
+                continue;
+                //printf("Right");
+            }
+        }
+        if (lastDirection != 3) {
+            if (IfSpear(GetPixel(midpointX, midpointY - i))) {
+                PressKey(0x26);
+                lastDirection = 3;
+                continue;
+                //printf("Up");
+            }
+        }
+        if (lastDirection != 4) {
+            if (IfSpear(GetPixel(midpointX, midpointY + i))) {
+                PressKey(0x28);
+                lastDirection = 4;
+                continue;
+                //printf("Down");
             }
         }
     }
