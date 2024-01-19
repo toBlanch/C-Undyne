@@ -1,8 +1,0 @@
-﻿  ConsoleApplication1.cpp
-  Generating code
-  4 of 5 functions (80.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-C:\Users\facts\Documents\GitHub\C-Undyne\ConsoleApplication1.cpp(19): warning C4172: returning address of local variable or temporary: pixelColors
-  Finished generating code
-  ConsoleApplication1.vcxproj -> C:\Users\facts\Documents\Visual Studio 2022\Solutions\x64\Release\ConsoleApplication1.exe
