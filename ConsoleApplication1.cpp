@@ -1,8 +1,5 @@
 #pragma once
 #include <Windows.h>
-#include <iostream>
-#include <vector>
-#include "ConsoleApplication1.h"
 
 using namespace std;
 HDC hdcScreen = ::GetDC(NULL);
@@ -10,11 +7,8 @@ HDC hdcScreen = ::GetDC(NULL);
 int* GetPixel(int x, int y) {
     
     COLORREF pixel = ::GetPixel(hdcScreen, x, y);
-    //ReleaseDC(NULL, hdcScreen);
     int red = GetRValue(pixel);
     int green = GetGValue(pixel);
-    //int blue = GetBValue(pixel);
-    //int pixelColors[3] = { red, green, blue };
     int pixelColors[2] = { red, green };
     return pixelColors;
 }
@@ -22,10 +16,6 @@ int* GetPixel(int x, int y) {
 int midpointX = 960;
 int midpointY = 540;
 int black = 70; //If a colour is less than or equal to this
-//int shieldR1 = 35;
-//int shieldR2 = 65;
-//int shieldG1 = 50;
-//int shieldG2 = 70;
 int lastDirection = 1; //1=Left, 2=Right, 3=Down, 4=Up
 int innerI = 120; //Maximum Inner coordinate is +- 83. Minimum Outer coordinate is 97 and maximum is 120 (I think)
 
